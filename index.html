@@ -17,6 +17,7 @@
         :root {
             /* Light Theme (Default) */
             --primary-color: #005f73;
+            --primary-color-rgb: 0, 95, 115;
             --secondary-color: #0a9396;
             --background-color: #edf2f4;
             --surface-color: #ffffff;
@@ -31,6 +32,7 @@
         html[data-theme="dark"] {
             /* Dark Theme */
             --primary-color: #94d2bd;
+            --primary-color-rgb: 148, 210, 189;
             --secondary-color: #ee9b00;
             --background-color: #1a202c;
             --surface-color: #2d3748;
@@ -212,6 +214,41 @@
             line-height: 1.6;
         }
 
+        /* ======================= KEY SCHEDULES SECTION (NEW) ======================= */
+        .key-schedules-grid {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap; /* Ensures stacking on smaller screens */
+        }
+
+        .schedule-link-btn {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Space between icon and text */
+            background-color: var(--surface-color);
+            color: var(--primary-color);
+            padding: 18px 35px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px var(--shadow-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.25s ease-in-out;
+        }
+
+        .schedule-link-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 7px 20px rgba(var(--primary-color-rgb), 0.12);
+            border-color: var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        .schedule-link-btn svg {
+            width: 28px;
+            height: 28px;
+        }
+
         /* ======================= FOOTER STYLES ======================= */
         .site-footer {
             background-color: var(--surface-color);
@@ -223,51 +260,113 @@
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
-        /* ======================= DARK MODE TOGGLES STYLES ======================= */
+        /* ======================= DARK MODE TOGGLES STYLES (FINETUNED) ======================= */
 
-        /* --- Desktop Toggle Switch --- */
+        /* --- Desktop Theme Toggle Button (Icon Only & Circular) --- */
         .theme-toggle-desktop {
             display: none;
         }
-        .theme-switch {
+        
+        .theme-toggle-btn {
             position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 26px;
-        }
-        .theme-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .slider {
-            position: absolute;
+            background: var(--surface-color);
+            border: 2px solid var(--border-color);
+            border-radius: 50%; /* Make it round */
+            width: 42px; /* Set explicit size for a perfect circle */
+            height: 42px;
             cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 26px;
+            transition: all 0.25s ease-in-out; /* Snappier transition */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            box-shadow: 0 2px 6px var(--shadow-color);
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile browsers */
         }
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 20px;
+        
+        /* Focus state for accessibility */
+        .theme-toggle-btn:focus-visible {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 3px;
+        }
+        
+        .theme-toggle-btn:hover {
+            border-color: var(--primary-color);
+            /* Glow effect on hover */
+            box-shadow: 0 4px 12px rgba(var(--primary-color-rgb), 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .theme-toggle-btn:active {
+            /* Tactile press effect */
+            transform: translateY(0) scale(0.95);
+            box-shadow: 0 2px 6px var(--shadow-color);
+        }
+        
+        .theme-icon-container {
+            position: relative;
             width: 20px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        input:checked + .slider {
-            background-color: var(--primary-color);
+        
+        .theme-icon {
+            position: absolute;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
         }
-        input:checked + .slider:before {
-            transform: translateX(24px);
+        
+        .theme-icon.sun-icon {
+            color: var(--secondary-color);
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
         }
+        
+        .theme-icon.moon-icon {
+            color: var(--primary-color);
+            opacity: 0;
+            transform: rotate(90deg) scale(0);
+        }
+        
+        /* --- Dark Mode State --- */
+        html[data-theme="dark"] .theme-toggle-btn {
+            border-color: var(--primary-color);
+        }
+        
+        html[data-theme="dark"] .theme-icon.sun-icon {
+            opacity: 0;
+            transform: rotate(-90deg) scale(0);
+        }
+        
+        html[data-theme="dark"] .theme-icon.moon-icon {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+        
+        /* --- Animated Background Effect --- */
+        .theme-toggle-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(var(--primary-color-rgb), 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .theme-toggle-btn:hover::before {
+            left: 100%;
+        }
+        
+        /* Pulse Animation on Theme Change */
+        .theme-toggle-btn.changing {
+            transform: scale(1.1);
+        }
+
 
         /* --- Mobile Floating Action Button (FAB) --- */
         .dark-mode-fab {
@@ -284,22 +383,16 @@
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             color: var(--primary-color);
-            
-            /* MODIFICATION: Added glassmorphism effect */
-            background-color: rgba(255, 255, 255, 0.4); /* Semi-transparent white for light mode */
-            -webkit-backdrop-filter: blur(10px); /* Blur effect for Safari */
-            backdrop-filter: blur(10px); /* Standard blur effect */
-            border: 1px solid rgba(0, 0, 0, 0.08); /* Faint border */
-            
+            background-color: rgba(255, 255, 255, 0.4); 
+            -webkit-backdrop-filter: blur(10px); 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(0, 0, 0, 0.08);
             transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
         }
-        
-        /* MODIFICATION: Override FAB colors for dark theme */
         html[data-theme="dark"] .dark-mode-fab {
-            background-color: rgba(45, 55, 72, 0.4); /* Semi-transparent surface color for dark mode */
-            border-color: rgba(237, 242, 244, 0.15); /* Faint light border */
+            background-color: rgba(45, 55, 72, 0.4);
+            border-color: rgba(237, 242, 244, 0.15);
         }
-
         .dark-mode-fab:hover {
             transform: scale(1.05);
         }
@@ -307,9 +400,12 @@
             width: 28px;
             height: 28px;
         }
-        .sun-icon {
-            display: none;
-        }
+
+        /* Mobile Icon Visibility */
+        .dark-mode-fab .moon-icon { display: block; }
+        .dark-mode-fab .sun-icon { display: none; }
+        html[data-theme="dark"] .dark-mode-fab .moon-icon { display: none; }
+        html[data-theme="dark"] .dark-mode-fab .sun-icon { display: block; }
 
 
         /* ======================= RESPONSIVE DESIGN ======================= */
@@ -373,12 +469,18 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="/">خانه</a></li>
-                    <li><a href="/lessons.html">درس‌ها</a></li>
+                    <li><a href="#">درس‌ها</a></li>
                     <li class="theme-toggle-desktop">
-                        <label class="theme-switch" for="theme-switch-checkbox" aria-label="Toggle dark mode">
-                            <input type="checkbox" id="theme-switch-checkbox" />
-                            <div class="slider"></div>
-                        </label>
+                        <button class="theme-toggle-btn" id="desktop-theme-toggle" aria-label="تغییر حالت تاریک/روشن">
+                            <div class="theme-icon-container">
+                                <svg class="theme-icon sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+                                </svg>
+                                <svg class="theme-icon moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278"/>
+                                </svg>
+                            </div>
+                        </button>
                     </li>
                 </ul>
             </nav>
@@ -394,10 +496,30 @@
             </p>
         </section>
 
+        <!-- ======================= بخش برنامه‌های کلیدی (جدید) ======================= -->
+        <section class="schedule-section homepage-section">
+            <div class="key-schedules-grid">
+                <a href="/plan" target="_blank" rel="noopener noreferrer" class="schedule-link-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0h18M-7.5 12h7.5" />
+                    </svg>
+                    <span>مشاهده برنامه هفتگی</span>
+                </a>
+
+                <a href="/power" target="_blank" rel="noopener noreferrer" class="schedule-link-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
+                    </svg>
+                    <span>برنامه قطعی برق</span>
+                </a>
+            </div>
+        </section>
+        <!-- ========================================================================= -->
+
         <section class="quick-links-section">
             <div class="quick-links-grid">
 
-                <a href="/exams.html" class="quick-link-card">
+                <a href="#" class="quick-link-card">
                     <div class="card-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor">
@@ -409,7 +531,7 @@
                     <p class="card-description">دسترسی به برنامه‌ها، بودجه‌بندی و نمونه سوالات امتحانی.</p>
                 </a>
 
-                <a href="/assignments.html" class="quick-link-card">
+                <a href="#" class="quick-link-card">
                     <div class="card-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor">
@@ -421,7 +543,7 @@
                     <p class="card-description">مشاهده لیست تکالیف، مهلت‌ها و ارسال فایل‌های مربوطه.</p>
                 </a>
 
-                <a href="/lessons.html" class="quick-link-card">
+                <a href="#" class="quick-link-card">
                     <div class="card-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor">
@@ -433,7 +555,7 @@
                     <p class="card-description">دانلود جزوات، فایل‌های کمک‌آموزشی و ویدیوهای ضبط شده.</p>
                 </a>
 
-                <a href="/announcements.html" class="quick-link-card">
+                <a href="#" class="quick-link-card">
                     <div class="card-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor">
@@ -490,40 +612,39 @@
         // --- DARK MODE LOGIC ---
         (function() {
             const htmlEl = document.documentElement;
-            const themeSwitchDesktop = document.getElementById('theme-switch-checkbox');
-            const themeSwitchMobile = document.getElementById('dark-mode-fab');
-            const sunIcon = document.querySelector('.sun-icon');
-            const moonIcon = document.querySelector('.moon-icon');
+            const desktopToggle = document.getElementById('desktop-theme-toggle');
+            const mobileToggle = document.getElementById('dark-mode-fab');
 
             function applyTheme(theme) {
                 htmlEl.dataset.theme = theme;
                 localStorage.setItem('theme', theme);
-
-                const isDark = theme === 'dark';
-                if (themeSwitchDesktop) {
-                    themeSwitchDesktop.checked = isDark;
-                }
-                if (sunIcon) {
-                    sunIcon.style.display = isDark ? 'block' : 'none';
-                }
-                if (moonIcon) {
-                    moonIcon.style.display = isDark ? 'none' : 'block';
-                }
             }
 
             function toggleTheme() {
                 const currentTheme = htmlEl.dataset.theme || 'light';
                 const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                // Add class for temporary animation on click
+                if (desktopToggle) {
+                    desktopToggle.classList.add('changing');
+                    // Use a timeout that matches the CSS transition duration
+                    setTimeout(() => {
+                        desktopToggle.classList.remove('changing');
+                    }, 250);
+                }
+                
                 applyTheme(newTheme);
             }
 
-            if (themeSwitchDesktop) {
-                themeSwitchDesktop.addEventListener('change', toggleTheme);
+            // Event listeners
+            if (desktopToggle) {
+                desktopToggle.addEventListener('click', toggleTheme);
             }
-            if (themeSwitchMobile) {
-                themeSwitchMobile.addEventListener('click', toggleTheme);
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', toggleTheme);
             }
 
+            // Initialize theme on page load
             const savedTheme = localStorage.getItem('theme');
             const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
             

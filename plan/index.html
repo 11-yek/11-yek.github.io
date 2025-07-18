@@ -1,76 +1,186 @@
-
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>برنامه هفتگی</title>
+    <title>برنامه هفتگی - گروه ۱-۱۱</title>
+
+    <!-- Google Fonts: Vazirmatn -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+    <!-- CSS STYLES EMBEDDED -->
     <style>
+        /* ======================= VARIABLES & BASIC SETUP (MODERN & FOCUSED) ======================= */
         :root {
-            --primary-color: #3b82f6;
-            --primary-color-light: #60a5fa;
-            --background-start: #0f172a;
-            --background-end: #0c1833;
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --text-primary: #e2e8f0;
-            --text-secondary: #94a3b8;
-            --border-color: rgba(148, 163, 184, 0.2);
-            --shadow-glow: rgba(59, 130, 246, 0.2);
-            --shadow-glow-hover: rgba(59, 130, 246, 0.4);
+            /* Light Theme (Default) */
+            --primary-color: #005f73;
+            --primary-color-rgb: 0, 95, 115;
+            --secondary-color: #0a9396;
+            --background-color: #edf2f4;
+            --surface-color: #ffffff;
+            --text-color: #1d3557;
+            --muted-text-color: #6c757d;
+            --border-color: #e9ecef;
+            --shadow-color: rgba(0, 0, 0, 0.06);
+            --container-width: 1200px; /* Increased for better 3-col layout */
+            --slot-bg-color: #f1f5f9;
+            --slot-bg-hover-color: #e2e8f0;
+            color-scheme: light;
+        }
+
+        html[data-theme="dark"] {
+            /* Dark Theme */
+            --primary-color: #94d2bd;
+            --primary-color-rgb: 148, 210, 189;
+            --secondary-color: #ee9b00;
+            --background-color: #1a202c;
+            --surface-color: #2d3748;
+            --text-color: #edf2f4;
+            --muted-text-color: #a0aec0;
+            --border-color: #4a5568;
+            --shadow-color: rgba(237, 242, 244, 0.08);
+            --slot-bg-color: #232c3b;
+            --slot-bg-hover-color: #4a5568;
+            color-scheme: dark;
+        }
+
+        /* ریست کلی و تنظیمات پایه */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100%;
         }
 
         body {
             font-family: 'Vazirmatn', sans-serif;
-            background-color: var(--background-start);
-            background-image: linear-gradient(135deg, var(--background-start) 0%, var(--background-end) 100%);
-            color: var(--text-primary);
-            margin: 0;
-            padding: 40px 20px 60px;
+            line-height: 1.7;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            direction: rtl;
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            flex-direction: column;
             min-height: 100vh;
-            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .main-container {
-            width: 100%;
-            max-width: 1200px;
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        .header {
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+
+        /* ======================= HEADER STYLES (CLEAN & SOLID) ======================= */
+        .site-header {
+            background-color: var(--surface-color);
+            color: var(--text-color);
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-bottom: 3px solid var(--primary-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .site-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-header .logo a {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .site-header .logo h1 {
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .main-nav ul li a {
+            color: var(--text-color);
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        html[data-theme="light"] .main-nav ul li a:hover {
+            background-color: #e9ecef;
+            color: var(--primary-color);
+        }
+
+        html[data-theme="dark"] .main-nav ul li a:hover {
+            background-color: #4a5568;
+            color: var(--primary-color);
+        }
+
+        /* ======================= MAIN CONTENT STYLES ======================= */
+        .site-content {
+            padding-top: 60px;
+            padding-bottom: 60px;
+            flex: 1;
+        }
+        
+        .page-title-section {
             text-align: center;
             margin-bottom: 50px;
         }
 
-        .header h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
+        .page-title-section p {
+            max-width: 650px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: var(--muted-text-color);
         }
 
+        /* ============================ WEEKLY SCHEDULE PAGE SPECIFIC STYLES ============================ */
+        
+        /* --- IMPROVED GRID LAYOUT --- */
         .schedule-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            /* This is the key change: creates a flexible multi-column grid */
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 25px;
         }
 
         .schedule-card {
-            background-color: var(--card-bg);
+            background-color: var(--surface-color);
             border-radius: 12px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            box-shadow: 0 4px 12px var(--shadow-color);
             padding: 25px;
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             display: flex;
@@ -80,16 +190,16 @@
         .schedule-card:hover {
             transform: translateY(-8px);
             border-color: var(--primary-color);
-            box-shadow: 0 8px 30px var(--shadow-glow-hover);
+            box-shadow: 0 8px 25px rgba(var(--primary-color-rgb), 0.15);
         }
 
-        .card-header h2 {
+        .card-header h3 {
             font-size: 1.75rem;
             font-weight: 700;
             margin: 0 0 20px 0;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
             border-bottom: 2px solid var(--primary-color);
-            color: var(--text-primary);
+            color: var(--text-color);
         }
 
         .time-slots {
@@ -99,7 +209,7 @@
         .time-slot {
             display: flex;
             align-items: center;
-            background-color: rgba(15, 23, 42, 0.8);
+            background-color: var(--slot-bg-color);
             padding: 12px 15px;
             border-radius: 8px;
             margin-bottom: 12px;
@@ -111,14 +221,14 @@
         
         .time-slot:hover {
             border-color: var(--primary-color);
-            background-color: rgba(15, 23, 42, 1);
+            background-color: var(--slot-bg-hover-color);
         }
 
         .time-slot svg {
             width: 20px;
             height: 20px;
             margin-left: 12px;
-            fill: var(--primary-color);
+            color: var(--primary-color);
             transition: transform 0.3s ease;
             flex-shrink: 0;
         }
@@ -128,142 +238,243 @@
         }
         
         .empty-slot-text {
-            color: var(--text-secondary);
+            color: var(--muted-text-color);
         }
 
+        /* ======================= FOOTER STYLES ======================= */
         .site-footer {
-            text-align: center;
-            margin-top: 60px;
-            padding-top: 25px;
+            background-color: var(--surface-color);
+            color: var(--muted-text-color);
+            padding: 25px 0;
+            font-size: 0.9rem;
             border-top: 1px solid var(--border-color);
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-        }
-
-        .site-footer a {
-            color: var(--text-primary);
-            font-weight: 500;
-            text-decoration: none;
-            position: relative;
-            padding-bottom: 2px;
-            transition: color 0.3s ease;
+            text-align: center;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         
-        .site-footer a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 0;
-            height: 1px;
-            background-color: var(--primary-color);
-            transition: width 0.3s ease;
-        }
+        /* ======================= DARK MODE TOGGLES STYLES (FINETUNED) ======================= */
+        .theme-toggle-desktop { display: none; }
+        .theme-toggle-btn { position: relative; background: var(--surface-color); border: 2px solid var(--border-color); border-radius: 50%; width: 42px; height: 42px; cursor: pointer; transition: all 0.25s ease-in-out; display: flex; align-items: center; justify-content: center; color: var(--text-color); box-shadow: 0 2px 6px var(--shadow-color); overflow: hidden; -webkit-tap-highlight-color: transparent; }
+        .theme-toggle-btn:focus-visible { outline: 2px solid var(--primary-color); outline-offset: 3px; }
+        .theme-toggle-btn:hover { border-color: var(--primary-color); box-shadow: 0 4px 12px rgba(var(--primary-color-rgb), 0.2); transform: translateY(-2px); }
+        .theme-toggle-btn:active { transform: translateY(0) scale(0.95); box-shadow: 0 2px 6px var(--shadow-color); }
+        .theme-icon-container { position: relative; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
+        .theme-icon { position: absolute; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: center; }
+        .theme-icon.sun-icon { color: var(--secondary-color); opacity: 1; transform: rotate(0deg) scale(1); }
+        .theme-icon.moon-icon { color: var(--primary-color); opacity: 0; transform: rotate(90deg) scale(0); }
+        html[data-theme="dark"] .theme-toggle-btn { border-color: var(--primary-color); }
+        html[data-theme="dark"] .theme-icon.sun-icon { opacity: 0; transform: rotate(-90deg) scale(0); }
+        html[data-theme="dark"] .theme-icon.moon-icon { opacity: 1; transform: rotate(0deg) scale(1); }
+        .theme-toggle-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(var(--primary-color-rgb), 0.1), transparent); transition: left 0.6s ease; }
+        .theme-toggle-btn:hover::before { left: 100%; }
+        .theme-toggle-btn.changing { transform: scale(1.1); }
+        .dark-mode-fab { display: flex; position: fixed; bottom: 20px; left: 20px; z-index: 1000; width: 56px; height: 56px; border-radius: 50%; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); color: var(--primary-color); background-color: rgba(255, 255, 255, 0.4); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid rgba(0, 0, 0, 0.08); transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease; }
+        html[data-theme="dark"] .dark-mode-fab { background-color: rgba(45, 55, 72, 0.4); border-color: rgba(237, 242, 244, 0.15); }
+        .dark-mode-fab:hover { transform: scale(1.05); }
+        .dark-mode-fab svg { width: 28px; height: 28px; }
+        .dark-mode-fab .moon-icon { display: block; } .dark-mode-fab .sun-icon { display: none; }
+        html[data-theme="dark"] .dark-mode-fab .moon-icon { display: none; } html[data-theme="dark"] .dark-mode-fab .sun-icon { display: block; }
 
-        .site-footer a:hover {
-            color: var(--primary-color-light);
-        }
 
-        .site-footer a:hover::after {
-            width: 100%;
-        }
+        /* ======================= RESPONSIVE DESIGN ======================= */
         
-        /* --- Responsive Adjustments --- */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.2rem;
+        /* --- NEW: Center the last card on the row in a 3-column layout --- */
+        /* This applies when there are 3 columns and an odd number of items (like our 7 days) */
+        @media (min-width: 1024px) {
+            .schedule-grid .schedule-card:last-child:nth-child(odd) {
+                grid-column: 2 / span 1;
             }
+        }
+
+        @media (min-width: 769px) {
+            .theme-toggle-desktop { display: block; }
+            .dark-mode-fab { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            h2 { font-size: 1.8rem; }
+            .site-content { padding-top: 40px; padding-bottom: 40px; }
+            .site-header .container { flex-direction: column; gap: 15px; }
+            .main-nav ul { justify-content: center; }
+            .theme-toggle-desktop { display: none; }
+            .page-title-section p { font-size: 1rem; }
         }
 
         @media (max-width: 480px) {
-            body {
-                padding: 30px 15px 50px;
-            }
-            .header h1 {
-                font-size: 1.8rem;
-            }
-            .card-header h2 {
-                font-size: 1.5rem;
-            }
-            .time-slot {
-                font-size: 1rem;
+            .card-header h3 { font-size: 1.5rem; }
+            .time-slot { font-size: 1rem; }
+            /* On mobile, use a more compact min-width for cards */
+            .schedule-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             }
         }
-
     </style>
 </head>
+
 <body>
 
-    <div class="main-container">
-        <header class="header">
-            <h1>
-                <span>برنامه هفتگی</span>
-            </h1>
-        </header>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <h1>گروه ۱-۱۱</h1>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/">خانه</a></li>
+                    <li><a href="#">درس‌ها</a></li>
+                    <li class="theme-toggle-desktop">
+                        <button class="theme-toggle-btn" id="desktop-theme-toggle" aria-label="تغییر حالت تاریک/روشن">
+                            <div class="theme-icon-container">
+                                <svg class="theme-icon sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/></svg>
+                                <svg class="theme-icon moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278"/></svg>
+                            </div>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-content container">
+
+
+            <h2>برنامه هفتگی کلاس</h2>
 
         <div class="schedule-grid">
             <!-- Saturday -->
             <div class="schedule-card">
-                <div class="card-header"><h2>شنبه</h2></div>
+                <div class="card-header"><h3>شنبه</h3></div>
                 <div class="time-slots">
-                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span>زنگ اول: هندسه (استاد رفعت)</span></div>
-                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span>زنگ دوم: هندسه (استاد رفعت)</span></div>
-                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span>زنگ سوم: شیمی (استاد پورخیابی)</span></div>
-                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span>زنگ چهارم: شیمی (استاد پورخیابی)</span></div>
+                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span>زنگ اول: هندسه (استاد رفعت)</span></div>
+                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span>زنگ دوم: هندسه (استاد رفعت)</span></div>
+                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span>زنگ سوم: شیمی (استاد پورخیابی)</span></div>
+                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span>زنگ چهارم: شیمی (استاد پورخیابی)</span></div>
                 </div>
             </div>
             <!-- Sunday -->
             <div class="schedule-card">
-                <div class="card-header"><h2>یکشنبه</h2></div>
+                <div class="card-header"><h3>یکشنبه</h3></div>
                 <div class="time-slots">
-                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span class="empty-slot-text">کلاسی ثبت نشده است</span></div>
+                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span class="empty-slot-text">کلاسی ثبت نشده است</span></div>
                 </div>
             </div>
             <!-- Monday -->
             <div class="schedule-card">
-                <div class="card-header"><h2>دوشنبه</h2></div>
+                <div class="card-header"><h3>دوشنبه</h3></div>
                 <div class="time-slots">
-                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span class="empty-slot-text">کلاسی ثبت نشده است</span></div>
+                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span class="empty-slot-text">کلاسی ثبت نشده است</span></div>
                 </div>
             </div>
             <!-- Tuesday -->
             <div class="schedule-card">
-                <div class="card-header"><h2>سه‌شنبه</h2></div>
+                <div class="card-header"><h3>سه‌شنبه</h3></div>
                 <div class="time-slots">
-                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span>زنگ اول: فیزیک (استاد محبتی)</span></div>
-                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span>زنگ دوم: فیزیک (استاد محبتی)</span></div>
-                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span>زنگ سوم: حسابان (استاد ندائی)</span></div>
-                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span>زنگ چهارم: حسابان (استاد ندائی)</span></div>
+                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span>زنگ اول: فیزیک (استاد محبتی)</span></div>
+                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span>زنگ دوم: فیزیک (استاد محبتی)</span></div>
+                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span>زنگ سوم: حسابان (استاد ندائی)</span></div>
+                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span>زنگ چهارم: حسابان (استاد ندائی)</span></div>
                 </div>
             </div>
             <!-- Wednesday -->
             <div class="schedule-card">
-                <div class="card-header"><h2>چهارشنبه</h2></div>
+                <div class="card-header"><h3>چهارشنبه</h3></div>
                 <div class="time-slots">
-                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span class="empty-slot-text">کلاسی ثبت نشده است</span></div>
+                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span class="empty-slot-text">کلاسی ثبت نشده است</span></div>
                 </div>
             </div>
             <!-- Thursday -->
             <div class="schedule-card">
-                <div class="card-header"><h2>پنج‌شنبه</h2></div>
+                <div class="card-header"><h3>پنج‌شنبه</h3></div>
                 <div class="time-slots">
-                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span class="empty-slot-text">کلاسی ثبت نشده است</span></div>
+                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span class="empty-slot-text">کلاسی ثبت نشده است</span></div>
                 </div>
             </div>
             <!-- Friday -->
-            <div class="schedule-card">
-                <div class="card-header"><h2>جمعه</h2></div>
+             <div class="schedule-card">
+                <div class="card-header"><h3>جمعه</h3></div>
                 <div class="time-slots">
-                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span class="empty-slot-text">روز تعطیل</span></div>
+                    <div class="time-slot"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"></path></svg><span class="empty-slot-text">روز تعطیل</span></div>
                 </div>
             </div>
         </div>
-        
-        <footer class="site-footer">
-            <p>Designed by <a href="https://github.com/iwebbio" target="_blank" rel="noopener noreferrer">moreweb</a></p>
-        </footer>
 
-    </div>
+    </main>
 
+    <!-- Mobile Dark Mode Toggle -->
+    <button class="dark-mode-fab" id="dark-mode-fab" aria-label="تغییر حالت تاریک/روشن">
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" /></svg>
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.95-4.243-1.591 1.591M5.25 12H3m4.243-4.95L6.036 5.636M12 12a4.5 4.5 0 0 1-4.5 4.5V7.5A4.5 4.5 0 0 1 12 12Z" /></svg>
+    </button>
+    
+    <footer class="site-footer">
+        <div class="container">
+            <p>
+                طراحی توسط امیرحسین شریفی
+                <br>
+                تمامی حقوق محفوظ است.
+                ©
+                <span id="copyright-year"></span>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // --- COPYRIGHT YEAR SCRIPT ---
+        document.addEventListener('DOMContentLoaded', function () {
+            const yearSpan = document.getElementById('copyright-year');
+            if (yearSpan) {
+                const currentGregorianYear = new Date().getFullYear();
+                const currentPersianYear = currentGregorianYear + (new Date().getMonth() > 2 ? -621 : -622); // More accurate Jalali conversion
+                yearSpan.textContent = new Intl.NumberFormat('fa-IR', { useGrouping: false }).format(currentPersianYear);
+            }
+        });
+
+        // --- DARK MODE LOGIC ---
+        (function() {
+            const htmlEl = document.documentElement;
+            const desktopToggle = document.getElementById('desktop-theme-toggle');
+            const mobileToggle = document.getElementById('dark-mode-fab');
+
+            function applyTheme(theme) {
+                htmlEl.dataset.theme = theme;
+                localStorage.setItem('theme', theme);
+            }
+
+            function toggleTheme() {
+                const currentTheme = htmlEl.dataset.theme || 'light';
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                if (desktopToggle) {
+                    desktopToggle.classList.add('changing');
+                    setTimeout(() => {
+                        desktopToggle.classList.remove('changing');
+                    }, 250);
+                }
+                
+                applyTheme(newTheme);
+            }
+
+            if (desktopToggle) {
+                desktopToggle.addEventListener('click', toggleTheme);
+            }
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', toggleTheme);
+            }
+
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            let initialTheme = 'light';
+            if (savedTheme) {
+                initialTheme = savedTheme;
+            } else if (prefersDark) {
+                initialTheme = 'dark';
+            }
+            
+            applyTheme(initialTheme);
+        })();
+    </script>
 </body>
 </html>
